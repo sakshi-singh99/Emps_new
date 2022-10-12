@@ -1,0 +1,84 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Employee
+
+@section TopMenu {
+    <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Dashboard">Profile</a>
+        </li> 
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">List</a>
+        </li>
+        </ul>
+}
+<div class="container shadow p-5">
+    <div class="row pb-2">
+        <h2>Add Employee</h2>
+    </div>
+
+    <form method="post">
+        <div asp-validation-summary="All"></div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label asp-for="EmpFirstName">First Name</label>
+                <input type="text" class="form-control mb-3" asp-for="EmpFirstName" placeholder="Enter First Name">
+                <span asp-validation-for="EmpFirstName" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="EmpLastName">Last Name</label>
+                <input type="text" class="form-control mb-3" asp-for="EmpLastName" placeholder="Enter Last Name">
+                <span asp-validation-for="EmpLastName" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="EmpEmail">Email</label>
+                <input type="email" class="form-control mb-3" asp-for="EmpEmail" placeholder="Enter Email">
+                <span asp-validation-for="EmpEmail" class=" alert-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label asp-for="EmpAddress">Address</label>
+                <input type="text" class="form-control mb-3" asp-for="EmpAddress" placeholder="Enter Address">
+                <span asp-validation-for="EmpAddress" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="EmpPhoneNumber">Phone Number</label>
+                <input type="number" maxlength="12" class="form-control mb-3" asp-for="EmpPhoneNumber" placeholder="Enter Phone Number">
+                <span asp-validation-for="EmpPhoneNumber" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="RoleId">Role</label>
+                <select asp-for="RoleId" asp-items="@(new SelectList(ViewBag.msg,"RoleId","RoleName"))">
+                </select>
+            </div>
+          @*  <div class="form-group col-md-6">
+                <label asp-for="Role">Role</label>
+                <input type="Text" maxlength="12" class="form-control mb-3" asp-for="Role" placeholder="Enter Role">
+                <span asp-validation-for="Role" class=" alert-danger"></span>
+            </div>*@
+            <div class="form-group col-md-6">
+                <label asp-for="EmpRegisteredDate">Role</label>
+                <input type="date" maxlength="12" class="form-control mb-3" asp-for="EmpRegisteredDate" placeholder="Enter Date">
+                <span asp-validation-for="EmpRegisteredDate" class=" alert-danger"></span>
+            </div>
+        </div>
+
+
+        <button type="submit" class="btn btn-lg btn-primary p-2"><i class="bi bi-file-plus-fill"></i>Save</button>
+        <a asp-controller="Admin" asp-action="Index" class="btn btn-lg btn-warning p-2">Back To List</a>
+    </form>
+
+</div>
+
+
+@*//for front end validations*@
+
+@section Scripts{
+    @{
+    <partial name="_ValidationScriptsPartial" />
+    }
+}

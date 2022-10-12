@@ -1,0 +1,40 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Employee
+<div class="text-center">
+    <h1 class="display-4">Employee Management System</h1>
+</div>
+<div class="container shadow p-5">
+    <div class="row pb-2">
+        <h2>Login</h2>
+    </div>
+    @if (TempData["LoginResult"] != null)
+    {
+        <h1 class="alert-success">@TempData["LoginResult"]</h1>
+    }
+    <form method="post">
+        @*<div asp-validation-summary="All"></div>*@
+
+        <div class="form-row">
+
+            <div class="form-group col-md-6">
+                <label asp-for="EmpEmail">Email</label>
+                <input type="email" class="form-control mb-3" asp-for="EmpEmail" placeholder="Enter Email">
+                <span asp-validation-for="EmpEmail" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="EmpPassword">Password</label>
+                <input type="password" class="form-control mb-3" asp-for="EmpPassword" placeholder="Enter Password">
+                <span asp-validation-for="EmpPassword" class=" alert-danger"></span>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-lg btn-primary p-2"><i class="bi bi-file-plus-fill"></i>Login</button>
+        </div>
+            <div>
+                @Html.ActionLink("Haven't Register? Register", "Registration")
+            </div>
+    </form>
+
+</div>

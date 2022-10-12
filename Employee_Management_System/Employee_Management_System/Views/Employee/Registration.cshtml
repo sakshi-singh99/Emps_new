@@ -1,0 +1,81 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Employee
+<div class="text-center">
+    <h1 class="display-4">Employee Management System</h1>
+</div>
+<div class="container shadow p-5">
+    <div class="row pb-2">
+        <h2>Registration</h2>
+    </div>
+    @if (TempData["ResultOk"] != null)
+    {
+        <h1 class="alert-success">@TempData["ResultOk"]</h1>
+    }
+    <form method="post">
+        @*<div asp-validation-summary="All"></div>*@
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label asp-for="EmpFirstName">First Name</label>
+                <input type="text" class="form-control mb-3" asp-for="EmpFirstName" placeholder="Enter First Name">
+                <span asp-validation-for="EmpFirstName" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="EmpLastName">Last Name</label>
+                <input type="text" class="form-control mb-3" asp-for="EmpLastName" placeholder="Enter Last Name">
+                <span asp-validation-for="EmpLastName" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="EmpEmail">Email</label>
+                <input type="email" class="form-control mb-3" asp-for="EmpEmail" placeholder="Enter Email">
+                <span asp-validation-for="EmpEmail" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="EmpPassword">Password</label>
+                <input type="password" class="form-control mb-3" asp-for="EmpPassword" placeholder="Enter Password">
+                <span asp-validation-for="EmpPassword" class=" alert-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label asp-for="EmpAddress">Address</label>
+                <input type="text" class="form-control mb-3" asp-for="EmpAddress" placeholder="Enter Address">
+                <span asp-validation-for="EmpAddress" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="EmpPhoneNumber">Phone Number</label>
+                <input type="number" maxlength="12" class="form-control mb-3" asp-for="EmpPhoneNumber" placeholder="Enter Phone Number">
+                <span asp-validation-for="EmpPhoneNumber" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="RoleId">Role</label>
+                <select asp-for="RoleId" asp-items="@(new SelectList(ViewBag.message,"RoleId","RoleName"))">
+                </select>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label asp-for="EmpRegisteredDate">Created On</label>
+                <input type="datetime-local" class="form-control" asp-for="EmpRegisteredDate">
+                <span asp-validation-for="EmpRegisteredDate" class=" alert-danger"></span>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-lg btn-primary p-2"><i class="bi bi-file-plus-fill"></i>Register</button>
+        </div>
+        <div>
+            @Html.ActionLink("Already register? Login", "Login")
+        </div>
+    </form>
+
+</div>
+
+
+@*//for front end validations*@
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    }

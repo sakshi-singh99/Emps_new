@@ -1,0 +1,89 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<Employee>
+@section TopMenu {
+    <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Dashboard">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">List</a>
+        </li>
+    </ul>
+}
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (TempData["ResultOk"] != null)
+{
+    <h1 class="alert-success">@TempData["ResultOk"]</h1>
+}
+
+<div class="container shadow p-5">
+
+    <h1 class="text-center mb-3">Employee List</h1>
+
+    <div class="col mb-3">
+        <a asp-controller="Admin" asp-action="Create" class="btn btn-lg btn-primary"><i class="bi bi-file-plus-fill"></i>Add Employee</a>
+    </div>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Address</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Role ID</th>
+                <th scope="col">Role Name</th>
+                <th scope="col">Registration Date</th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="20%">
+                        @item.EmpId
+                    </td> 
+                    <td width="20%">
+                        @item.EmpFirstName
+                    </td>
+                    <td width="20%">
+                        @item.EmpLastName
+                    </td>
+                    <td width="25%">
+                        @item.EmpEmail
+                    </td> 
+                    <td width="25%">
+                        @item.EmpAddress
+                    </td> 
+                    <td width="25%">
+                        @item.EmpPhoneNumber
+                    </td>
+                    <td width="25%">
+                        @item.RoleId
+                    </td>
+                    <td width="25%">
+                        @item.Role
+                    </td>
+                    <td width="20%">
+                        @item.EmpRegisteredDate
+                    </td>
+                    <td>
+                        <div role="group" class="w-60 btn-group">
+                            <a asp-controller="Admin" asp-action="Edit" asp-route-id="@item.EmpId" class=" btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i>Edit</a>&nbsp;
+                            <a asp-controller="Admin" asp-action="Delete" asp-route-id="@item.EmpId" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i>Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
