@@ -67,6 +67,29 @@ namespace Employee_Management_System.Migrations
                     b.ToTable("Employees");
                 });
 
+            modelBuilder.Entity("Employee_Management_System.Models.Map", b =>
+                {
+                    b.Property<int>("MapId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MapId"), 1L, 1);
+
+                    b.Property<int>("EmpId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MapId");
+
+                    b.HasIndex("EmpId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("Maps");
+                });
+
             modelBuilder.Entity("Employee_Management_System.Models.Project", b =>
                 {
                     b.Property<int>("ProjectId")
@@ -110,6 +133,25 @@ namespace Employee_Management_System.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("Employee_Management_System.Models.Map", b =>
+                {
+                    b.HasOne("Employee_Management_System.Models.Employee", "employee")
+                        .WithMany()
+                        .HasForeignKey("EmpId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Employee_Management_System.Models.Project", "project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("employee");
+
+                    b.Navigation("project");
                 });
 #pragma warning restore 612, 618
         }

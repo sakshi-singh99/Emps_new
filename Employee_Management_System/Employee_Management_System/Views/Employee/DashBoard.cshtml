@@ -6,6 +6,17 @@
 *@
 
 @model Employee
+@section TopMenu {
+    <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="DashBoard">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="GetProject">Project List</a>
+        </li>
+    </ul>
+}
+
 @{
     ViewBag.Title = "DashBoard";
 }
@@ -44,7 +55,7 @@
                 @*<th scope="col">Role Name</th>*@
                 <th scope="col">Registration Date</th>
 
-                <th></th>
+                @*<th></th>*@
             </tr>
         </thead>
         <tbody>

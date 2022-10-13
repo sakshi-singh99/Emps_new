@@ -72,6 +72,7 @@ namespace Employee_Management_System.Controllers
                 //var Managerole = _context.Employees.Any(r=>r.RoleId==2);
                 if (get_user != null)
                 {
+                    HttpContext.Session.SetString("EmpId", get_user.EmpId.ToString());
                     HttpContext.Session.SetString("Email", get_user.EmpEmail.ToString());
                     HttpContext.Session.SetString("Password", get_user.EmpPassword.ToString());
                     HttpContext.Session.SetString("FirstName", get_user.EmpFirstName.ToString());
@@ -120,6 +121,20 @@ namespace Employee_Management_System.Controllers
             {
                 return RedirectToAction("Login", "Employee");
             }
+        }
+        public IActionResult GetProject()
+        {
+            var Emp = new Employee();
+            var role = new Map();
+            int id = Convert.ToInt32(HttpContext.Session.GetInt32("EmpId"));
+            if (id == role.EmpId)
+            {
+
+                IEnumerable<Map> objCatlist = _context.Maps;
+                //var d = objCatlist.FirstOrDefault(x => x.EmpId == Emp.EmpId);
+                return View(objCatlist);
+            }
+            return View();
         }
     }
 }

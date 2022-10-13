@@ -61,14 +61,53 @@ namespace Employee_Management_System.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Maps",
+                columns: table => new
+                {
+                    MapId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmpId = table.Column<int>(type: "int", nullable: false),
+                    ProjectId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Maps", x => x.MapId);
+                    table.ForeignKey(
+                        name: "FK_Maps_Employees_EmpId",
+                        column: x => x.EmpId,
+                        principalTable: "Employees",
+                        principalColumn: "EmpId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Maps_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "ProjectId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_RoleId",
                 table: "Employees",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Maps_EmpId",
+                table: "Maps",
+                column: "EmpId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Maps_ProjectId",
+                table: "Maps",
+                column: "ProjectId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Maps");
+
             migrationBuilder.DropTable(
                 name: "Employees");
 

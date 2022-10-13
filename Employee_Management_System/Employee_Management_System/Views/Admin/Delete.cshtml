@@ -24,7 +24,7 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label asp-for="EmpFirstName">First Name</label>
-                <input type="text" class="form-control mb-3" asp-for="EmpFirstName" placeholder="Enter First Name">
+                    <input type="text" class="form-control mb-3" asp-for="EmpFirstName" placeholder="Enter First Name" disabled>
                 <span asp-validation-for="EmpFirstName" class=" alert-danger"></span>
             </div>
             <div class="form-group col-md-6">
@@ -34,7 +34,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label asp-for="EmpEmail">Email</label>
-                <input type="email" class="form-control mb-3" asp-for="EmpEmail" placeholder="Enter Email">
+                    <input type="email" class="form-control mb-3" asp-for="EmpEmail" placeholder="Enter Email" disabled>
                 <span asp-validation-for="EmpEmail" class=" alert-danger"></span>
             </div>
         </div>
@@ -42,17 +42,17 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label asp-for="EmpAddress">Address</label>
-                <input type="text" class="form-control mb-3" asp-for="EmpAddress" placeholder="Enter Address">
+                    <input type="text" class="form-control mb-3" asp-for="EmpAddress" placeholder="Enter Address" disabled>
                 <span asp-validation-for="EmpAddress" class=" alert-danger"></span>
             </div>
             <div class="form-group col-md-6">
                 <label asp-for="EmpPhoneNumber">Phone Number</label>
-                <input type="number" maxlength="12" class="form-control mb-3" asp-for="EmpPhoneNumber" placeholder="Enter Phone Number">
+                    <input type="number" maxlength="12" class="form-control mb-3" asp-for="EmpPhoneNumber" placeholder="Enter Phone Number" disabled>
                 <span asp-validation-for="EmpPhoneNumber" class=" alert-danger"></span>
             </div>
             <div class="form-group col-md-6">
                 <label asp-for="RoleId">Role Id</label>
-                <input type="Number" maxlength="12" class="form-control mb-3" asp-for="RoleId" placeholder="Enter Role Id">
+                    <input type="Number" maxlength="12" class="form-control mb-3" asp-for="RoleId" placeholder="Enter Role Id" disabled>
                 <span asp-validation-for="RoleId" class=" alert-danger"></span>
             </div>
      @*       <div class="form-group col-md-6">
@@ -62,7 +62,7 @@
             </div>*@
             <div class="form-group col-md-6">
                 <label asp-for="EmpRegisteredDate">Role</label>
-                <input type="date" maxlength="12" class="form-control mb-3" asp-for="EmpRegisteredDate" placeholder="Enter Date">
+                    <input type="date" maxlength="12" class="form-control mb-3" asp-for="EmpRegisteredDate" placeholder="Enter Date" disabled>
                 <span asp-validation-for="EmpRegisteredDate" class=" alert-danger"></span>
             </div>
         </div>

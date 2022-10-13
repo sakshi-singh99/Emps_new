@@ -1,0 +1,82 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Employee
+@{
+    ViewBag.Title = "DashBoard";
+}
+@section TopMenu {
+    <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Project" asp-action="Dashboard">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Project" asp-action="Index">Project List</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Map" asp-action="Index">Map List</a>
+        </li>
+    </ul>
+}
+
+@if (@Context.Session.GetString("FirstName") != null)
+{
+
+    <div style=" color:red; font:900">
+        <h1>Hello, @Context.Session.GetString("FirstName").ToString()</h1>
+    </div>
+
+}
+<div class="container shadow p-5">
+
+    <h1 class="text-center mb-3">Your Info</h1>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Address</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Role ID</th>
+                @*<th scope="col">Role Name</th>*@
+                <th scope="col">Registration Date</th>
+
+               @* <th></th>*@
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td width="20%">
+                    @Context.Session.GetString("FirstName").ToString()
+                </td>
+                <td width="20%">
+                    @Context.Session.GetString("LastName").ToString()
+                </td>
+                <td width="20%">
+                    @Context.Session.GetString("Email").ToString()
+                </td>
+                <td width="25%">
+                    @Context.Session.GetString("Address").ToString()
+                </td>
+                <td width="25%">
+                    @Context.Session.GetString("Phone").ToString()
+                </td>
+                <td width="25%">
+                    @Context.Session.GetString("Email").ToString()
+                </td>
+                <td width="25%">
+                    @Context.Session.GetString("RoleId").ToString()
+                </td>
+                <td width="25%">
+                    @Context.Session.GetString("Date").ToString()
+                </td>
+
+
+            </tr>
+
+        </tbody>
+    </table>
+</div>

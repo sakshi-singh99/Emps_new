@@ -1,0 +1,59 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Map
+@section TopMenu {
+    <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Project" asp-action="Dashboard">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Project" asp-action="Index">Project List</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Map" asp-action="Index">Map List</a>
+        </li>
+    </ul>
+}
+<div class="container shadow p-5">
+    <div class="row pb-2">
+        <h2>Map</h2>
+    </div>
+    @if (TempData["ResultOk"] != null)
+    {
+        <h1 class="alert-success">@TempData["ResultOk"]</h1>
+    }
+    <form method="post">
+        @*<div asp-validation-summary="All"></div>*@
+
+        <div class="form-row" style="display:flex">
+            <div class="form-group col-md-6" style="display:flex">
+                <label asp-for="EmpId">Employee Id  </label>
+                <select asp-for="EmpId" asp-items="@(new SelectList(ViewBag.empDropDown,"EmpId","EmpEmail"))">
+                </select>
+            </div>
+            <div class="form-group col-md-6" style="display:flex">
+                <label asp-for="ProjectId">Project Id  </label>
+                <select asp-for="ProjectId" asp-items="@(new SelectList(ViewBag.projectDropDown,"ProjectId","ProjectName"))">
+                </select>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <div>
+
+            <button type="submit" class="btn btn-lg btn-primary p-2"><i class="bi bi-file-plus-fill"></i>Save</button>
+            <a asp-controller="Map" asp-action="Index" class="btn btn-lg btn-warning p-2">Back To List</a>
+        </div>
+    </form>
+
+</div>
+
+
+@*//for front end validations*@
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    }
