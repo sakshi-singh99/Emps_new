@@ -6,6 +6,7 @@ namespace Employee_Management_System.Models
     public class Employee
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EmpId { get; set; }
         [Required(ErrorMessage = "Please enter First Name")]
         public string EmpFirstName { get; set; }

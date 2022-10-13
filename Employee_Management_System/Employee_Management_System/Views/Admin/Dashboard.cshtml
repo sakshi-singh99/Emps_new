@@ -11,7 +11,7 @@
             <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Dashboard">Profile</a>
         </li> 
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">List</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Employee List</a>
         </li>
         </ul>
 }
@@ -19,7 +19,7 @@
 {
 
     <div style=" color:red; font:900">
-        Hello, @Context.Session.GetString("FirstName").ToString()
+        <h1>Hello, @Context.Session.GetString("FirstName").ToString()</h1>
     </div>
 
 }

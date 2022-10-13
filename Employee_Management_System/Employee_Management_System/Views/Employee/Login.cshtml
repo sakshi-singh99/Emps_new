@@ -2,6 +2,16 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @model Employee
+@section TopMenu {
+    <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Registration">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Login">Login</a>
+        </li>
+    </ul>
+}
 <div class="text-center">
     <h1 class="display-4">Employee Management System</h1>
 </div>

@@ -3,13 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Employee_Management_System.Models
 {
-    public class Role
+    public class Project
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int RoleId { get; set; }
+        public int ProjectId { get; set; }
         [Required]
-        public string RoleName { get; set; }
-
+        public string ProjectName { get; set; }
     }
 }

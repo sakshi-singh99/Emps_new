@@ -8,7 +8,7 @@
             <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Dashboard">Profile</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">List</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Employee List</a>
         </li>
     </ul>
 }
@@ -55,11 +55,11 @@
                 <input type="Number" maxlength="12" class="form-control mb-3" asp-for="RoleId" placeholder="Enter Role Id">
                 <span asp-validation-for="RoleId" class=" alert-danger"></span>
             </div>
-            <div class="form-group col-md-6">
+     @*       <div class="form-group col-md-6">
                 <label asp-for="Role">Role</label>
                 <input type="Text" maxlength="12" class="form-control mb-3" asp-for="Role" placeholder="Enter Role">
                 <span asp-validation-for="Role" class=" alert-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group col-md-6">
                 <label asp-for="EmpRegisteredDate">Role</label>
                 <input type="date" maxlength="12" class="form-control mb-3" asp-for="EmpRegisteredDate" placeholder="Enter Date">

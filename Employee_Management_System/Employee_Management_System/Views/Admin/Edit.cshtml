@@ -8,7 +8,7 @@
             <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Dashboard">Profile</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">List</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Employee List</a>
         </li>
     </ul>
 }
@@ -60,14 +60,11 @@
                 <span asp-validation-for="Role" class=" alert-danger"></span>
             </div>*@
             <div class="form-group col-md-6">
-                <label asp-for="EmpRegisteredDate">Role</label>
+                <label asp-for="EmpRegisteredDate">Registration Date</label>
                 <input type="date" maxlength="12" class="form-control mb-3" asp-for="EmpRegisteredDate" placeholder="Enter Date">
                 <span asp-validation-for="EmpRegisteredDate" class=" alert-danger"></span>
             </div>
         </div>
-
-
-
         <button type="submit" class="btn btn-lg btn-primary p-2"><i class="bi bi-file-plus-fill"></i>Update</button>
         <a asp-controller="Admin" asp-action="Index" class="btn btn-lg btn-warning p-2">Back To List</a>
     </form>

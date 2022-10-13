@@ -45,7 +45,7 @@ namespace Employee_Management_System.Controllers
               //  var empRecord = _context.Employees.FromSqlRaw(query).ToList();
                 _context.Employees.Add(empobj);
                 _context.SaveChanges();
-                TempData["ResultOk"] = "Resistration Successfully!";
+                TempData["ResultOk"] = "Registered Successfully!";
                 return RedirectToAction("Login");
             }
             else {
@@ -68,7 +68,8 @@ namespace Employee_Management_System.Controllers
             {
                 var get_user = _context.Employees.Single(p => p.EmpEmail == empobj.EmpEmail
                                && p.EmpPassword == empobj.EmpPassword);
-                var role = _context.Roles.Any(r=>r.RoleId==1);
+                //var Adminrole = _context.Employees.Any(r=>r.RoleId==1);
+                //var Managerole = _context.Employees.Any(r=>r.RoleId==2);
                 if (get_user != null)
                 {
                     HttpContext.Session.SetString("Email", get_user.EmpEmail.ToString());
@@ -79,9 +80,18 @@ namespace Employee_Management_System.Controllers
                     HttpContext.Session.SetString("Phone", get_user.EmpPhoneNumber.ToString());
                     HttpContext.Session.SetString("RoleId", get_user.RoleId.ToString());
                     HttpContext.Session.SetString("Date", get_user.EmpRegisteredDate.ToString());
-                    if (role == true)
+                    string role = HttpContext.Session.GetString("RoleId");
+                    if (role == "1")
                     {
                         return RedirectToAction("Dashboard", "Admin");
+                    }  
+                    if (role=="2")
+                    {
+                        return RedirectToAction("Dashboard", "Project");
+                    } 
+                    if (role=="3")
+                    {
+                        return RedirectToAction("Dashboard", "Employee");
                     }
                     return RedirectToAction("Login");
                 }
@@ -99,7 +109,7 @@ namespace Employee_Management_System.Controllers
             return View();
         }
 
-        public ActionResult DashBoard()
+        public IActionResult Dashboard()
         {
             if (HttpContext.Session.GetString("Email") != null)
             {
@@ -108,13 +118,8 @@ namespace Employee_Management_System.Controllers
             }
             else
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Employee");
             }
-
         }
-
-      
-          
-     
     }
 }

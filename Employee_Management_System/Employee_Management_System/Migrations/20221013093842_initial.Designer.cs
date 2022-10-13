@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Employee_Management_System.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221011085932_initial")]
+    [Migration("20221013093842_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -67,6 +67,23 @@ namespace Employee_Management_System.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("Employee_Management_System.Models.Project", b =>
+                {
+                    b.Property<int>("ProjectId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProjectId"), 1L, 1);
+
+                    b.Property<string>("ProjectName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProjectId");
+
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("Employee_Management_System.Models.Role", b =>

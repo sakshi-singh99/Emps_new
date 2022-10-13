@@ -11,5 +11,6 @@ namespace Employee_Management_System.Data
         }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Project> Projects { get; set; }
     }
 }
