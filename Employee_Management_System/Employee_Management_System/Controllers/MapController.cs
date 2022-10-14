@@ -13,7 +13,24 @@ namespace Employee_Management_System.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Map> objCatlist = _context.Maps;
+            List<Employee> employee = _context.Employees.ToList();
+            List<Project> project = _context.Projects.ToList();
+            List<Map> map = _context.Maps.ToList();
+            var objCatlist = from m in map
+                              join e in employee on m.EmpId equals e.EmpId into table1
+                              from e in table1.ToList()
+                              join p in project on m.ProjectId equals p.ProjectId into table2
+                              from p in table2.ToList()
+                              select new UiModel
+                              {
+                                  Mapui = m,
+                                  EmployeeUi = e,
+                                  ProjectUi = p
+                              };
+            //List <Map> map =  new List<Map>();
+            //var get_user = objCatlist.Single(p => p.ProjectId == map.Any(m=>m.ProjectId)
+            //           && p.Password == empobj.EmpPassword);
+
             return View(objCatlist);
         }
 

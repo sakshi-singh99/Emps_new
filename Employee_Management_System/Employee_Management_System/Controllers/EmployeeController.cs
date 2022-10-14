@@ -39,10 +39,6 @@ namespace Employee_Management_System.Controllers
             var get_user = _context.Employees.FirstOrDefault(email => email.EmpEmail == empobj.EmpEmail);
             if(get_user == null)
             {
-              //  string query = $"spRegister {empobj.EmpFirstName}," +
-              //$"{empobj.EmpLastName},{empobj.EmpEmail},{empobj.EmpPassword},{empobj.EmpAddress},{empobj.EmpPhoneNumber}" +
-              //$"{empobj.RoleId},{empobj.EmpRegisteredDate}";
-              //  var empRecord = _context.Employees.FromSqlRaw(query).ToList();
                 _context.Employees.Add(empobj);
                 _context.SaveChanges();
                 TempData["ResultOk"] = "Registered Successfully!";
@@ -66,21 +62,34 @@ namespace Employee_Management_System.Controllers
         {
             try
             {
-                var get_user = _context.Employees.Single(p => p.EmpEmail == empobj.EmpEmail
-                               && p.EmpPassword == empobj.EmpPassword);
-                //var Adminrole = _context.Employees.Any(r=>r.RoleId==1);
-                //var Managerole = _context.Employees.Any(r=>r.RoleId==2);
+                var objCatlist = (from e in _context.Employees
+                              join m in _context.Roles on e.RoleId equals m.RoleId
+                              where e.RoleId==m.RoleId select new
+                              {
+                                  Id = e.EmpId,
+                                  Firstname = e.EmpFirstName,
+                                  Lastname = e.EmpLastName,
+                                  Email = e.EmpEmail,
+                                  Password = e.EmpPassword,
+                                  Address = e.EmpAddress,
+                                  Phone = e.EmpPhoneNumber,
+                                  Roleid = e.RoleId,
+                                  Rolename = m.RoleName,
+                                  Date = e.EmpRegisteredDate,
+                              }).ToList();
+                var get_user = objCatlist.Single(p => p.Email == empobj.EmpEmail
+                               && p.Password == empobj.EmpPassword);
                 if (get_user != null)
                 {
-                    HttpContext.Session.SetString("EmpId", get_user.EmpId.ToString());
-                    HttpContext.Session.SetString("Email", get_user.EmpEmail.ToString());
-                    HttpContext.Session.SetString("Password", get_user.EmpPassword.ToString());
-                    HttpContext.Session.SetString("FirstName", get_user.EmpFirstName.ToString());
-                    HttpContext.Session.SetString("LastName", get_user.EmpLastName.ToString());
-                    HttpContext.Session.SetString("Address", get_user.EmpAddress.ToString());
-                    HttpContext.Session.SetString("Phone", get_user.EmpPhoneNumber.ToString());
-                    HttpContext.Session.SetString("RoleId", get_user.RoleId.ToString());
-                    HttpContext.Session.SetString("Date", get_user.EmpRegisteredDate.ToString());
+                    HttpContext.Session.SetString("EmpId", get_user.Id.ToString());
+                    HttpContext.Session.SetString("FirstName", get_user.Firstname.ToString());
+                    HttpContext.Session.SetString("LastName", get_user.Lastname.ToString());
+                    HttpContext.Session.SetString("Email", get_user.Email.ToString());
+                    HttpContext.Session.SetString("Address", get_user.Address.ToString());
+                    HttpContext.Session.SetString("Phone", get_user.Phone.ToString());
+                    HttpContext.Session.SetString("RoleId", get_user.Roleid.ToString());
+                    HttpContext.Session.SetString("RoleName", get_user.Rolename.ToString());
+                    HttpContext.Session.SetString("Date", get_user.Date.ToString());
                     string role = HttpContext.Session.GetString("RoleId");
                     if (role == "1")
                     {
@@ -104,9 +113,7 @@ namespace Employee_Management_System.Controllers
             catch
             {
                 TempData["LoginResult"] = "Email or Password does not match";
-
             }
-
             return View();
         }
 
@@ -124,16 +131,49 @@ namespace Employee_Management_System.Controllers
         }
         public IActionResult GetProject()
         {
-            var Emp = new Employee();
-            var role = new Map();
-            int id = Convert.ToInt32(HttpContext.Session.GetInt32("EmpId"));
-            if (id == role.EmpId)
-            {
+            //List<Map> objCatlist = new List<Map>();
+            //objCatlist = (from e in _context.Employees
+            //              join m in _context.Maps on e.EmpId equals m.EmpId
+            //              select m).ToList();
+            //int id = Convert.ToInt32(HttpContext.Session.GetInt32("EmpId"));
+            //if (objCatlist.Any(p=>p.EmpId==id))
+            //{
+            //    return View(objCatlist);
+            //}
 
-                IEnumerable<Map> objCatlist = _context.Maps;
-                //var d = objCatlist.FirstOrDefault(x => x.EmpId == Emp.EmpId);
-                return View(objCatlist);
+            List<Employee> employee = _context.Employees.ToList();
+            List<Project> project = _context.Projects.ToList();
+            List<Map> map = _context.Maps.ToList();
+            var getProject = from m in map
+                             join e in employee on m.EmpId equals e.EmpId into table1
+                             from e in table1.ToList()
+                             join p in project on m.ProjectId equals p.ProjectId into table2
+                             from p in table2.ToList()
+                             select new UiModel
+                             {
+                                 Mapui = m,
+                                 EmployeeUi = e,
+                                 ProjectUi = p
+                             };
+
+            //var objgetProject = (from g in getProject
+            //                     join m in _context.Maps on g.EmployeeUi.EmpId equals m.EmpId
+            //                     where g.EmployeeUi.EmpId == m.EmpId
+            //                     select new
+            //                     {
+            //                       Id = m.ProjectId,
+            //                       Name  = g.ProjectUi.ProjectName
+            //                     }).ToList();
+
+            //var get_project = getProject.Single(p => p.EmployeeUi.EmpId == p.Mapui.EmpId
+            //                 && p.ProjectUi.ProjectId == p.Mapui.ProjectId);
+
+            string email = HttpContext.Session.GetString("Email");
+            if (getProject.Any(p =>p.EmployeeUi.EmpEmail==email))
+            {
+                return View (getProject);
             }
+
             return View();
         }
     }

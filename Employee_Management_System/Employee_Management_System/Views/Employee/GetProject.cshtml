@@ -1,7 +1,7 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@model IEnumerable<Map>
+@model IEnumerable<Employee_Management_System.Models.UiModel>
 @section TopMenu {
     <ul class="navbar-nav flex-grow-1">
         <li class="nav-item">
@@ -31,29 +31,31 @@
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
-                <th scope="col">Project Id</th>
-
-
-
-                <th></th>
+                <th scope="col">Project Name</th>
             </tr>
         </thead>
         <tbody>
-
-            @foreach (var item in Model)
-            {
+           
+            @if(Model==null){
                 <tr>
-                    <td width="20%">
-                        @item.ProjectId
-                    </td>
                     <td>
-                        @*       <div role="group" class="w-60 btn-group">
-                    <a asp-controller="Admin" asp-action="Edit" asp-route-id="@item.EmpId" class=" btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i>Edit</a>&nbsp;
-                    <a asp-controller="Admin" asp-action="Delete" asp-route-id="@item.EmpId" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i>Delete</a>
-                    </div>*@
+                        No Project
                     </td>
                 </tr>
+            }else{
+            foreach (var item in Model)
+            {
+                    @if (@item.EmployeeUi.EmpEmail == Context.Session.GetString("Email"))
+                    {
+                        <tr>
+                            <td width="20%">
+                                @item.ProjectUi.ProjectName
+                            </td>
+                        </tr>
+                }
             }
+            }
+         
         </tbody>
     </table>
 </div>

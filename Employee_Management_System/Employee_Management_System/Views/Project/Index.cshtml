@@ -34,9 +34,8 @@
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
-                <th scope="col">Id</th>
+          @*      <th scope="col">Id</th>*@
                 <th scope="col">Project Name</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -44,9 +43,9 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td width="20%">
+                   @* <td width="20%">
                         @item.ProjectId
-                    </td>
+                    </td>*@
                     <td width="20%">
                         @item.ProjectName
                     </td>
